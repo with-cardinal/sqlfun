@@ -1,5 +1,5 @@
 // Load the function spec
-export function load(client, functionSpec) {
+function load(client, functionSpec) {
   if (!functionSpec.functions) {
     return {};
   }
@@ -19,3 +19,5 @@ function sqlFn(client, name) {
     return (await client.query(query, args)).rows;
   };
 }
+
+module.exports = load;
