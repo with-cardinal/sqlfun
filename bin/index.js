@@ -4,6 +4,7 @@ require("dotenv").config();
 const yargs = require("yargs");
 const { Client } = require("pg");
 const chalk = require("chalk");
+const fs = require("fs");
 
 const JSON_VERSION = 0;
 
@@ -13,6 +14,9 @@ const options = yargs
   .string("d")
   .alias("d", "databaseUrl")
   .describe("d", "Specify the database url")
+  .string("o")
+  .alias("o", "outFile")
+  .describe("o", "Write output to outFile rather than STDOUT")
   .help().argv;
 
 const schema = options._[0] || "public";
@@ -44,9 +48,13 @@ client.connect(err => {
       [schema]
     );
 
-    console.log(
-      JSON.stringify({ version: JSON_VERSION, functions: result.rows }, null, 2)
-    );
+    const data = { version: JSON_VERSION, functions: result.rows };
+
+    if (options.outFile) {
+      fs.writeFileSync(options.outFile, JSON.stringify(data));
+    } else {
+      console.log(JSON.stringify(data, null, 2));
+    }
   } catch (err) {
     console.error(chalk.red("Error"), err.message);
   }
