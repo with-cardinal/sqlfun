@@ -1,7 +1,7 @@
 {
   "name": "sqlfun",
   "version": "0.0.1",
-  "description": "Import sql functions into your project",
+  "description": "Import sql functions",
   "main": "src/index.js",
   "repository": "https://github.com/with-cardinal/sqlfun",
   "author": "Alan Johnson <nalanj@fastmail.com>",
