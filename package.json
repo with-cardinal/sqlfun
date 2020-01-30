@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "Import sql functions",
   "main": "src/index.js",
+  "bin": {
+    "sqlfun": "bin/index.js"
+  },
   "repository": "https://github.com/with-cardinal/sqlfun",
   "author": "Alan Johnson <nalanj@fastmail.com>",
   "license": "MIT",
