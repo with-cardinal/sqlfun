@@ -2,7 +2,7 @@
 DROP FUNCTION IF EXISTS "find_show_by_name";
 DROP FUNCTION IF EXISTS "find_show_by_id";
 DROP FUNCTION IF EXISTS "insert_show";
-DROP TABLE shows;
+DROP TABLE IF EXISTS shows;
 
 CREATE TABLE shows (
     id integer NOT NULL PRIMARY KEY,
