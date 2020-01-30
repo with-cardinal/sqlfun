@@ -1,9 +1,5 @@
 -- Schema for sqlfun testing
-DROP FUNCTION IF EXISTS "findShowByName";
-DROP FUNCTION IF EXISTS "findShowById";
-DROP FUNCTION IF EXISTS "insertShow";
-DROP TABLE IF EXISTS shows;
-
+DROP TABLE shows;
 CREATE TABLE shows (
     id integer NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE
@@ -22,8 +18,8 @@ INSERT INTO shows(id, name) VALUES (
     4, 'I Love Lucy'
 );
 
-
-CREATE FUNCTION "findShowByName"(
+DROP FUNCTION IF EXISTS "find_show_by_name";
+CREATE FUNCTION "find_show_by_name"(
   _name text
 ) RETURNS SETOF shows AS $$
 BEGIN
@@ -33,8 +29,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE FUNCTION "findShowById"(
+DROP FUNCTION IF EXISTS "find_show_by_id";
+CREATE FUNCTION "find_show_by_id"(
   _id integer
 ) RETURNS SETOF shows AS $$
 BEGIN
@@ -45,7 +41,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE FUNCTION "insertShow"(
+DROP FUNCTION IF EXISTS "insert_show";
+CREATE FUNCTION "insert_show"(
   _id integer,
   _name text
 ) RETURNS SETOF shows AS $$

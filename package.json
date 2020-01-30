@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "camel-case": "^4.1.1",
     "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
     "pg": "^7.17.1",

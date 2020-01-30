@@ -5,8 +5,7 @@ const yargs = require("yargs");
 const { Client } = require("pg");
 const chalk = require("chalk");
 const fs = require("fs");
-
-const JSON_VERSION = 0;
+const { read } = require("../src/index");
 
 const options = yargs
   .scriptName("sqlfun")
@@ -32,23 +31,7 @@ client.connect(err => {
 
 (async function() {
   try {
-    const result = await client.query(
-      `SELECT routines.routine_name as function, 
-        routines.specific_name as "specificName",
-        parameters.parameter_name as "parameterName",
-        parameters.ordinal_position as "parameterOrdinal"
-      FROM information_schema.routines
-      LEFT JOIN information_schema.parameters 
-        ON parameters.specific_name = routines.specific_name
-      WHERE routines.routine_schema = $1 
-        AND parameters.parameter_mode != 'OUT'
-      ORDER BY routines.specific_name,
-        routines.routine_name, 
-        parameters.ordinal_position ASC;`,
-      [schema]
-    );
-
-    const data = { version: JSON_VERSION, functions: result.rows };
+    const data = await read(client, schema);
 
     if (options.outFile) {
       fs.writeFileSync(options.outFile, JSON.stringify(data));
