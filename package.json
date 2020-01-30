@@ -7,6 +7,9 @@
   "author": "Alan Johnson <nalanj@fastmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "citest": "jest"
+  },
   "dependencies": {
     "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
