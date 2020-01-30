@@ -29,5 +29,6 @@ describe("read", () => {
     const result = await fns.findShowByName("Bewitched");
     expect(result.length).toEqual(1);
     expect(result[0].id).toEqual(3);
+    expect(result[0].productionYear).toEqual(1963);
   });
 });

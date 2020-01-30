@@ -1,4 +1,5 @@
-const { camelCase } = require("camel-case");
+const camelCase = require("lodash/camelCase");
+const mapKeys = require("lodash/mapKeys");
 
 const JSON_VERSION = 0;
 
@@ -34,7 +35,10 @@ function load(client, functionSpec) {
     if (acc[camelCase(cur.function)]) {
       return acc;
     }
-    return { ...acc, [camelCase(cur.function)]: sqlFn(client, cur.function) };
+    return {
+      ...acc,
+      [camelCase(cur.function)]: sqlFn(client, cur.function)
+    };
   }, {});
 }
 
@@ -42,7 +46,8 @@ function sqlFn(client, name) {
   return async (...args) => {
     const argHolders = args.map((_, i) => `$${i + 1}`).join(",");
     const query = `SELECT * FROM "${name}"(${argHolders})`;
-    return (await client.query(query, args)).rows;
+    const rows = (await client.query(query, args)).rows;
+    return rows.map(row => mapKeys(row, (v, k) => camelCase(k)));
   };
 }
 
