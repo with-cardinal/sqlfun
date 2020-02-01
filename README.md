@@ -1,5 +1,8 @@
 # sqlfun
 
+![NPM](https://img.shields.io/npm/v/sqlfun?style=for-the-badge)
+![Build Status](https://img.shields.io/github/workflow/status/with-cardinal/sqlfun/CI?style=for-the-badge)
+
 Import postgresql functions into your project
 
 ## Generating Function Defs
